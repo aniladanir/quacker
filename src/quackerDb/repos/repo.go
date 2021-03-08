@@ -1,12 +1,12 @@
 package repos
 
 import (
-	"github.com/aniladanir/quacker/quackerDb/models"
+	"github.com/aniladanir/quacker/quackerDb/model"
 )
 
 type Repo interface {
-	Add(model models.Model) error
-	Get(id int) (models.Model, error)
-	Update(model models.Model) error
+	Add(model model.Model) error
+	Get(id int) (model.Model, error)
+	Update(model model.Model) error
 	Remove(id int) error
 }

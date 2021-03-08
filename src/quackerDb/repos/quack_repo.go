@@ -1,7 +1,7 @@
 package repos
 
 import (
-	"github.com/aniladanir/quacker/quackerDb/models"
+	"github.com/aniladanir/quacker/quackerDb/model"
 	"github.com/go-pg/pg/v10"
 )
 
@@ -9,8 +9,8 @@ type QuackRepo struct {
 	Db *pg.DB
 }
 
-func (r *QuackRepo) Add(m models.Model) error {
-	_, err := r.Db.Model(m.(*models.Quack)).Insert()
+func (r *QuackRepo) Add(m model.Model) error {
+	_, err := r.Db.Model(m.(*model.Quack)).Insert()
 
 	if err != nil {
 		return err
@@ -19,8 +19,8 @@ func (r *QuackRepo) Add(m models.Model) error {
 	return nil
 }
 
-func (r *QuackRepo) Get(id int) (models.Model, error) {
-	quack := models.Quack{Id: id}
+func (r *QuackRepo) Get(id int) (model.Model, error) {
+	quack := model.Quack{Id: id}
 	err := r.Db.Model(&quack).WherePK().Select()
 
 	if err != nil {
@@ -30,8 +30,8 @@ func (r *QuackRepo) Get(id int) (models.Model, error) {
 	return quack, nil
 }
 
-func (r *QuackRepo) Update(m models.Model) error {
-	_, err := r.Db.Model(m.(*models.Quack)).UpdateNotZero()
+func (r *QuackRepo) Update(m model.Model) error {
+	_, err := r.Db.Model(m.(*model.Quack)).UpdateNotZero()
 
 	if err != nil {
 		return err
@@ -41,7 +41,7 @@ func (r *QuackRepo) Update(m models.Model) error {
 }
 
 func (r *QuackRepo) Remove(id int) error {
-	quack := models.Quack{Id: id}
+	quack := model.Quack{Id: id}
 
 	_, err := r.Db.Model(&quack).WherePK().Delete()
 	if err != nil {

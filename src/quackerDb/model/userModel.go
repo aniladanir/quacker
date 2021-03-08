@@ -1,7 +1,7 @@
-package models
+package model
 
 type User struct {
-	Id          int
+	Id          int    `pg:",pk"`
 	Tag         string `pg:",unique"`
 	Email       string `pg:",unique"`
 	Password    string `pg:",notnull"`

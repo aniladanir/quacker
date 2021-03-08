@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/aniladanir/quacker/db/repos"
+	"github.com/aniladanir/quacker/quackerDb/repos"
 	"github.com/gofiber/fiber/v2"
 )
 

@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/aniladanir/quacker/quackerDb"
-	"github.com/aniladanir/quacker/quackerDb/models"
+	"github.com/aniladanir/quacker/quackerDb/model"
 	"github.com/go-pg/pg/v10"
 )
 
@@ -48,7 +48,7 @@ func main() {
 }
 
 func InsertMockupData(dbService *quackerDb.DbService) {
-	users := []models.User{
+	users := []model.User{
 		{
 			Id:          1,
 			Tag:         "father",
@@ -74,7 +74,7 @@ func InsertMockupData(dbService *quackerDb.DbService) {
 			Description: "",
 		},
 	}
-	quacks := []models.Quack{
+	quacks := []model.Quack{
 		{
 			Id:      1,
 			Content: "QUAAAACK",

@@ -1,11 +1,11 @@
-package models
+package model
 
 type Quack struct {
-	Id        int
+	Id        int `pg:",pk"`
 	Content   string
 	Quacks    []*Quack    `pg:"rel:has-many"`
 	Favorites []*Favorite `pg:"rel:has-many"`
-	UserId    int
+	UserId    int         `pg:",notnull"`
 }
 
 func (q Quack) IsModel() bool {

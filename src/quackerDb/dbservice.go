@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/aniladanir/quacker/quackerDb/models"
+	"github.com/aniladanir/quacker/quackerDb/model"
 	"github.com/aniladanir/quacker/quackerDb/repos"
 	"github.com/go-pg/pg/v10"
 	"github.com/go-pg/pg/v10/orm"
@@ -57,13 +57,13 @@ func Connect(opts *pg.Options) error {
 
 func CreateSchema() error {
 
-	orm.RegisterTable((*models.UserToUser)(nil))
+	orm.RegisterTable((*model.Connection)(nil))
 
 	models := []interface{}{
-		(*models.User)(nil),
-		(*models.Quack)(nil),
-		(*models.Favorite)(nil),
-		(*models.UserToUser)(nil),
+		(*model.User)(nil),
+		(*model.Quack)(nil),
+		(*model.Favorite)(nil),
+		(*model.Connection)(nil),
 	}
 	for _, model := range models {
 		err := database.Model(model).CreateTable(&orm.CreateTableOptions{
