@@ -41,5 +41,5 @@
 * GET                |  "/api/quack/id=?/quoted"
     * returns quacks that quoted this quack
 
-## Relational Database  --  Er Diagram
+### Relational Database  --  Er Diagram
 ![](https://imgur.com/Hr3BxQT.jpg)
