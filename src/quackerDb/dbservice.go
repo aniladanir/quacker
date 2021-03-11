@@ -5,14 +5,16 @@ import (
 	"fmt"
 
 	"github.com/aniladanir/quacker/quackerDb/model"
-	"github.com/aniladanir/quacker/quackerDb/repos"
+	"github.com/aniladanir/quacker/quackerDb/repo"
 	"github.com/go-pg/pg/v10"
 	"github.com/go-pg/pg/v10/orm"
 )
 
 type DbService struct {
-	UserRepo  repos.Repo
-	QuackRepo repos.Repo
+	UserRepo  repo.Repo
+	QuackRepo repo.Repo
+	LikeRepo  repo.Repo
+	ConnRepo  repo.Repo
 }
 
 var dbService_Singleton *DbService
@@ -29,10 +31,16 @@ func GetService() (*DbService, error) {
 	}
 
 	dbService := DbService{
-		UserRepo: &repos.UserRepo{
+		UserRepo: &repo.UserRepo{
 			Db: database,
 		},
-		QuackRepo: &repos.QuackRepo{
+		QuackRepo: &repo.QuackRepo{
+			Db: database,
+		},
+		LikeRepo: &repo.LikeRepo{
+			Db: database,
+		},
+		ConnRepo: &repo.ConnRepo{
 			Db: database,
 		},
 	}
@@ -62,7 +70,7 @@ func CreateSchema() error {
 	models := []interface{}{
 		(*model.User)(nil),
 		(*model.Quack)(nil),
-		(*model.Favorite)(nil),
+		(*model.Like)(nil),
 		(*model.Connection)(nil),
 	}
 	for _, model := range models {

@@ -21,24 +21,38 @@
 ### Web Server  --  Method  |  Endpoint
 * GET   |   "/"
     * returns html template
-* POST, PUT, DELETE  |  "/api/user"
-* POST, PUT, DELETE  |  "/api/quack"
-* POST, DELETE       |  "/api/like"
-* POST, DELETE       |  "/api/connection"
+
+* POST               |  "/api/user"
+* PUT,DELETE         |  "/api/user/:id"
+
+* POST               |  "/api/quack"
+* PUT, DELETE        |  "/api/quack/:id"
+
+* POST               |  "/api/like"
+* DELETE             |  "/api/like/:id"
+
+* POST               |  "/api/connection"
+* DELETE             |  "/api/connection/:id"
+
 * POST               |  "/api/login"
 * POST               |  "/api/signup"
 
-* GET                |  "/api/user/tag=?"
+
+* GET                |  "/api/user/:id"
+    * returns user info with quacks and likes
+* GET                |  "/api/user/:tag"
     * returns user info with quacks and likes
 * GET                |  "/api/user/timeline"
     * returns quacks from followings
-* GET                |  "/api/quack/id=?"
+
+
+* GET                |  "/api/quack/:id"
     * returns quack info with replies
-* GET                |  "/api/quack/id=?/requacks"
+* GET                |  "/api/quack/:id/requacks"
     * returns users' info who requacked this quack
-* GET                |  "/api/quack/id=?/likes"
+* GET                |  "/api/quack/:id/likes"
     * returns users' info who liked this quack
-* GET                |  "/api/quack/id=?/quoted"
+* GET                |  "/api/quack/:id/quoted"
     * returns quacks that quoted this quack
 
 ### Relational Database  --  Er Diagram

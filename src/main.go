@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/aniladanir/quacker/quackerDb"
 	"github.com/aniladanir/quacker/quackerDb/model"
+	"github.com/aniladanir/quacker/quackerDb/repo"
 	"github.com/go-pg/pg/v10"
 )
 
@@ -37,14 +39,9 @@ func main() {
 
 	InsertMockupData(dbService)
 
-	/*
-		apiConfig := fiber.Config{
-			ServerHeader:  "Quacker",
-			CaseSensitive: true,
-			StrictRouting: true,
-		}
-		app := fiber.New(apiConfig)
-	*/
+	users, err := dbService.UserRepo.(*repo.UserRepo).GetFollowings(1)
+	fmt.Println(users)
+
 }
 
 func InsertMockupData(dbService *quackerDb.DbService) {
@@ -82,13 +79,92 @@ func InsertMockupData(dbService *quackerDb.DbService) {
 		},
 		{
 			Id:      2,
-			Content: "quack",
-			UserId:  2,
+			Content: "asd",
+			UserId:  1,
 		},
 		{
 			Id:      3,
 			Content: "quack",
+			UserId:  2,
+		},
+		{
+			Id:      4,
+			Content: "ADFGAD",
+			UserId:  2,
+		},
+		{
+			Id:      5,
+			Content: "quack",
 			UserId:  3,
+		},
+		{
+			Id:      6,
+			Content: "tut",
+			UserId:  3,
+		},
+	}
+	likes := []model.Like{
+		{
+			Id:      1,
+			UserId:  1,
+			QuackId: 3,
+		},
+		{
+			Id:      2,
+			UserId:  1,
+			QuackId: 6,
+		},
+		{
+			Id:      3,
+			UserId:  2,
+			QuackId: 1,
+		},
+		{
+			Id:      4,
+			UserId:  2,
+			QuackId: 5,
+		},
+		{
+			Id:      5,
+			UserId:  3,
+			QuackId: 2,
+		},
+		{
+			Id:      6,
+			UserId:  3,
+			QuackId: 4,
+		},
+	}
+	conns := []model.Connection{
+		{
+			Id:         1,
+			FolloweeId: 1,
+			FollowerId: 2,
+		},
+		{
+			Id:         2,
+			FolloweeId: 1,
+			FollowerId: 3,
+		},
+		{
+			Id:         3,
+			FolloweeId: 2,
+			FollowerId: 1,
+		},
+		{
+			Id:         4,
+			FolloweeId: 2,
+			FollowerId: 3,
+		},
+		{
+			Id:         5,
+			FolloweeId: 3,
+			FollowerId: 1,
+		},
+		{
+			Id:         6,
+			FolloweeId: 3,
+			FollowerId: 2,
 		},
 	}
 
@@ -101,6 +177,20 @@ func InsertMockupData(dbService *quackerDb.DbService) {
 
 	for _, quack := range quacks {
 		err := dbService.QuackRepo.Add(&quack)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	for _, like := range likes {
+		err := dbService.LikeRepo.Add(&like)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	for _, conn := range conns {
+		err := dbService.ConnRepo.Add(&conn)
 		if err != nil {
 			panic(err)
 		}
